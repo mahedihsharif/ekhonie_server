@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "minLength": 10,
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "mrp": {
+      "type": "integer"
+    },
+    "images": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "shortDescription": {
+      "type": "string"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
+    },
+    "sellingPrice": {
+      "type": "decimal",
+      "required": true
+    },
+    "availability": {
+      "type": "enumeration",
+      "enum": [
+        "In stock",
+        "out of stock"
+      ]
+    },
+    "tags": {
+      "type": "text"
+    },
+    "slugs": {
+      "type": "uid"
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true
+    },
+    "reviews": {
+      "type": "integer",
+      "min": 1
+    },
+    "soldQuantity": {
+      "type": "integer"
+    },
+    "offer": {
+      "type": "integer"
+    }
+  }
+}
