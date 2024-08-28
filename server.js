@@ -18,7 +18,7 @@ connectDB();
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your frontend's URL
+    origin: "https://ekhonie.netlify.app/", // Replace with your frontend's URL
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization",
     credentials: true, // If you need to handle cookies or other credentials
