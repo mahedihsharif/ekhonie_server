@@ -3,21 +3,21 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 exports.register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   try {
     let user = await User.findOne({ email });
     if (user) return res.status(400).json({ msg: "User already exists" });
 
-    user = new User({ name, email, password });
+    user = new User({ firstName, lastName, email, password });
     await user.save();
 
     const payload = { user: { id: user.id } };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "12h",
     });
 
-    res.json({ token });
+    res.json({ token, user });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -36,10 +36,10 @@ exports.login = async (req, res) => {
 
     const payload = { user: { id: user.id } };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "12h",
     });
 
-    res.json({ token });
+    res.json({ token, user });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

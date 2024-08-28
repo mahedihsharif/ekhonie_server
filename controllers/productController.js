@@ -1,20 +1,48 @@
 const Product = require("../models/Product");
 const cloudinary = require("../config/cloudinary");
+const Category = require("../models/Category");
 
 exports.createProduct = async (req, res) => {
+  const {
+    title,
+    file,
+    shortDescription,
+    description,
+    price,
+    mrp,
+    reviews,
+    tags,
+    availability,
+    slug,
+    quantity,
+    soldQuantity,
+    offer,
+    categoryId,
+  } = req.body;
+  console.log(categoryId);
+  // Find the category by ID
+  const category = await Category.findById(categoryId);
+  if (!category) {
+    return res.status(404).json({ error: "Category not found" });
+  }
+
   try {
-    const result = await cloudinary.uploader.upload(req.file.path);
+    const result = await cloudinary.uploader.upload(file);
     const newProduct = new Product({
-      title: req.body.title,
-      image: result.secure_url,
-      description: req.body.description,
-      price: req.body.price,
-      reviews: req.body.reviews,
-      tags: req.body.tags,
-      availability: req.body.availability,
-      slug: req.body.slug,
-      quantity: req.body.quantity,
-      category: req.body.category,
+      title: title,
+      file: result.secure_url,
+      shortDescription: shortDescription,
+      description: description,
+      price: price,
+      mrp: mrp,
+      reviews: reviews,
+      tags: tags,
+      availability: availability,
+      slug: slug,
+      quantity: quantity,
+      soldQuantity: soldQuantity,
+      offer: offer,
+      category: category,
     });
 
     const product = await newProduct.save();

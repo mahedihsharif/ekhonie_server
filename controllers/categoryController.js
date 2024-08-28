@@ -2,12 +2,14 @@ const Category = require("../models/Category");
 const cloudinary = require("../config/cloudinary");
 
 exports.createCategory = async (req, res) => {
+  const { title, file, totalProducts } = req.body;
+
   try {
-    const result = await cloudinary.uploader.upload(req.file.path);
+    const result = await cloudinary.uploader.upload(file);
     const newCategory = new Category({
-      title: req.body.title,
-      image: result.secure_url,
-      totalProducts: 0,
+      title: title,
+      file: result.secure_url,
+      totalProducts: totalProducts,
     });
 
     const category = await newCategory.save();
@@ -18,7 +20,7 @@ exports.createCategory = async (req, res) => {
   }
 };
 
-exports.getCategories = async (req, res) => {
+exports.getCategories = async (_, res) => {
   try {
     const categories = await Category.find();
     res.json(categories);

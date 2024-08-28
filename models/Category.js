@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const CategorySchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  image: { type: String, required: true },
+  title: { type: String, required: true, unique: true },
+  file: { type: String },
   totalProducts: { type: Number, default: 0 },
 });
 

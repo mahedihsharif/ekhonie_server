@@ -2,12 +2,14 @@ const Blog = require("../models/Blog");
 const cloudinary = require("../config/cloudinary");
 
 exports.createBlog = async (req, res) => {
+  const { title, file, description } = req.body;
+
   try {
-    const result = await cloudinary.uploader.upload(req.file.path);
+    const result = await cloudinary.uploader.upload(file);
     const newBlog = new Blog({
-      title: req.body.title,
-      image: result.secure_url,
-      description: req.body.description,
+      title: title,
+      file: result.secure_url,
+      description: description,
       date: Date.now(),
     });
 

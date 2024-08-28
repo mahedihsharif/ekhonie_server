@@ -1,16 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
+const authMiddleware = require("../middleware/authMiddleware");
 const {
   createCategory,
   getCategories,
 } = require("../controllers/categoryController");
 const multer = require("multer");
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
+const upload = require("../utils/multer");
 
 // Create category
-router.post("/", auth, upload.single("image"), createCategory);
+router.post("/", authMiddleware, upload.single("image"), createCategory);
 
 // Get all categories
 router.get("/", getCategories);
