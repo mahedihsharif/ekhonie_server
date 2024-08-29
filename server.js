@@ -17,11 +17,22 @@ connectDB();
 // Init Middleware
 app.use(bodyParser.json());
 // Configure CORS
+const prodOrigin = [process.env.PROD_ORIGIN];
+const devOrigin = ["http://localhost:5173"];
+const allowOrigins =
+  process.env.NODE_ENV === "production" ? prodOrigin : devOrigin;
 app.use(
   cors({
-    origin: "https://ekhonie.netlify.app/", // Match the exact origin
-    methods: ["GET", "POST", "PUT", "DELETE"], // Add the allowed methods
-    credentials: true, // If you need to include credentials like cookies, set this to true
+    origin: (origin, callback) => {
+      if (allowOrigins.includes(origin)) {
+        console.log(origin, allowOrigins);
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
 app.use(express.json({ extended: false }));
