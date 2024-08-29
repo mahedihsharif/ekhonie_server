@@ -19,12 +19,13 @@ app.use(bodyParser.json());
 // Configure CORS
 const prodOrigin = [process.env.PROD_ORIGIN];
 const devOrigin = ["http://localhost:5173"];
-const allowedOrigins =
+const allowOrigins =
   process.env.NODE_ENV === "production" ? prodOrigin : devOrigin;
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      if (allowOrigins.includes(origin)) {
+        console.log(origin, allowOrigins);
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
