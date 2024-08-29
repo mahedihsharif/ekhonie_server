@@ -3,7 +3,6 @@ const authMiddleware = require("../middleware/authMiddleware");
 require("dotenv").config();
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-console.log(stripe.checkout.sessions);
 
 // Payment Intent API
 router.post("/create-checkout-session", authMiddleware, async (req, res) => {

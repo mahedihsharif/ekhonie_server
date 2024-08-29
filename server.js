@@ -16,12 +16,12 @@ connectDB();
 
 // Init Middleware
 app.use(bodyParser.json());
+// Configure CORS
 app.use(
   cors({
-    origin: "https://ekhonie.netlify.app/", // Replace with your frontend's URL
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
-    credentials: true, // If you need to handle cookies or other credentials
+    origin: "http://localhost:5173", // Match the exact origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Add the allowed methods
+    credentials: true, // If you need to include credentials like cookies, set this to true
   })
 );
 app.use(express.json({ extended: false }));
