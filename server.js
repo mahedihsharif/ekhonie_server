@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 // Configure CORS
 app.use(
   cors({
-    origin: "http://localhost:5173", // Match the exact origin
+    origin: ["http://localhost:5173", "https://ekhonie.netlify.app/"], // Match the exact origin
     methods: ["GET", "POST", "PUT", "DELETE"], // Add the allowed methods
     credentials: true, // If you need to include credentials like cookies, set this to true
   })
