@@ -19,7 +19,7 @@ exports.createProduct = async (req, res) => {
     offer,
     categoryId,
   } = req.body;
-  console.log(categoryId);
+   
   // Find the category by ID
   const category = await Category.findById(categoryId);
   if (!category) {

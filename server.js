@@ -20,9 +20,9 @@ app.use(bodyParser.json());
 
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN, // Your Netlify domain
+    origin: process.env.CLIENT_ORIGIN,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // If you need to send cookies or use HTTP authentication
+    credentials: true,
   })
 );
 

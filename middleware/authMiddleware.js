@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
   const bearer = req.headers.authorization;
-
+ 
   if (bearer.startsWith("Bearer ")) {
     const bearerToken = bearer.split("Bearer ")[1];
 
